@@ -30,10 +30,12 @@ async function callback(tabs) {
             const sentimentScore = data.sentiment.score;
 
             document.getElementById("results").style.display = "block";
+            document.getElementById("spinner").style.display = "none"
 
             let truncatedSedimentScore = "n/a"
 
             if (sentimentScore !== undefined) {
+                document.getElementById("sentiment-score").style.display = "";
                 truncatedSedimentScore = sentimentScore.toString().substring(0, 6);
             }
 
@@ -43,8 +45,8 @@ async function callback(tabs) {
 
             this.setCategories(data);
         })
-
         .catch((error) => {
+            document.getElementById("spinner").style.display = "none"
             alert("We were unable to analyze this website.")
         });
 }
