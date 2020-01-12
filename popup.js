@@ -32,7 +32,7 @@ async function callback(tabs) {
             document.getElementById("results").style.display = "block";
             document.getElementById("spinner").style.display = "none";
 
-            let truncatedSedimentScore = "n/a"
+            let truncatedSedimentScore = "n/a";
 
             if (sentimentScore !== undefined) {
                 document.getElementById("sentiment-score").style.display = "inline";
@@ -41,6 +41,9 @@ async function callback(tabs) {
 
             document.getElementById("sentiment-score").textContent = "This sentiment score is: " + truncatedSedimentScore;
 
+            if (truncatedSedimentScore !== "n/a") {
+                this.setupProgressBar(truncatedSedimentScore);
+            }
 
             this.setKeywords(data.topthreekeywords);
             this.setOverallSentiment(sentimentScore);
@@ -75,6 +78,7 @@ function setCategories(data) {
         createCategoryDiv();
     }
 
+
     this.clearCategories();
 
     for (let i = 0; i < data.categories.length; i++) {
@@ -101,7 +105,6 @@ function clearCategories() {
     }
 }
 
-
 function createCategoryDiv() {
 
     let newCategoryDiv = document.createElement("div");
@@ -110,6 +113,25 @@ function createCategoryDiv() {
 
     document.getElementById("spacer").appendChild(newCategoryDiv);
 
+}
+
+
+function setupProgressBar(truncatedSentimentScore) {
+
+    let maxWidth = window.innerWidth;   
+    truncatedSentimentScore = parseFloat(truncatedSentimentScore);
+
+    console.log(typeof truncatedSentimentScore);
+
+    console.log("before math");
+
+    let width = (truncatedSedimentScore + 1.0) * maxWidth
+
+    console.log("after math");
+
+
+    let progressBar = document.getElementById("progress-bar");
+    progressBar.style["width"] = width.toString() + "px";
 }
 
 function setOverallSentiment(sentimentScore) {
