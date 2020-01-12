@@ -7,33 +7,48 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" type="text/css" href="popup.css" />
   </head>
 
-  <body>
-    <div style="width: 500px; height:500px; margin-top:1rem">
+  <body style="font-family: 'Montserrat'">
+    <div class="container" id="container">
       <div>
-        <div>
-          <h5 style="font-family: 'Montserrat'; text-align:center">Text Sentiment and category analyzer</h5>
+        <h5 style="text-align:center">
+          Text Sentiment and category analyzer
+        </h5>
+      </div>
+
+      <div class="row align-items-center">
+        <div
+          id="spinner"
+          style="display: block"
+          class="spinner-border"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
         </div>
       </div>
 
-      <div id="spinner" style="display: block" class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
+      <div class="row" id="results" style="display: none">
+        <div class="col-12" id="sentiment-score" style="display: none">
+          The sentiment score is:
+        </div>
+        <div class="col-12" id="overallSentiment">
+          This text is neutral
+        </div>
 
-      <div id="results" style="display: none">
-        <div id="spacer"></div>
+        <div class="col-12" id="spacer"></div>
 
-        <div id="category">
+        <div class="col-12" id="category">
           The category is (are):
         </div>
 
-        <div id="sentiment-score" style="display: none">
-          The sentiment score is:
-        </div>
-
-        <div id="keywords-container">
+        <div class="col-12" id="keywords-container">
           <div>
             The keywords of this article are:
           </div>
@@ -47,11 +62,8 @@
             Keyword 3
           </div>
         </div>
-        
-        <div id="overallSentiment">
-          This text is neutral
-        </div>
       </div>
+
       <script src="popup.js"></script>
     </div>
   </body>
