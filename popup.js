@@ -22,6 +22,7 @@ analyzeTextButton.onclick = async () => {
 }
 
 factCheckTextButton.onclick = async () => {
+    //TODO update this endpoint
     fetch('https://nwhackers2020.appspot.com/analyze', {
       method: 'POST',
       headers: {
