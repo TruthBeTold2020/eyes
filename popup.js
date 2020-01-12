@@ -56,11 +56,11 @@ let overallSentimentContainer = document.getElementById("popupContainer");
 
 function setKeywords(keywordArray) {
   document.getElementById("keyword1").textContent =
-    "- " + keywordArray[0].toLowerCase();
+    " #" + keywordArray[0].toLowerCase();
   document.getElementById("keyword2").textContent =
-    "- " + keywordArray[1].toLowerCase();
+    " #" + keywordArray[1].toLowerCase();
   document.getElementById("keyword3").textContent =
-    "- " + keywordArray[2].toLowerCase();
+    " #" + keywordArray[2].toLowerCase();
 }
 
 function setCategories(data) {
