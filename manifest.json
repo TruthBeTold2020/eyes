@@ -8,6 +8,10 @@
             "128": "icon.png"
         }
     },
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["content_scripts.js"]
+    }],
     "icons": {
         "128": "icon.png"
     },
