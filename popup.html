@@ -1,53 +1,57 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-</head>
-
-<body>
-  <div style="width: 300px">
-    <div>
+  <body>
+    <div style="width: 300px">
       <div>
-        <h6>Text Sentiment and category analyzer</h5>
-      </div>
-    </div>
-
-    <div id="spinner" style="display: block" class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-
-    <div id="results" style="display: none">
-      <div id="sentiment-score" style="display:none">
-        The sentiment score is:
-      </div>
-
-      <div id="keywords-container">
         <div>
-          The keywords of this article are:
-        </div>
-        <div id="keyword1">
-          Keyword 1
-        </div>
-        <div id="keyword2">
-          Keyword 2
-        </div>
-        <div id="keyword3">
-          Keyword 3
+          <h6>Text Sentiment and category analyzer</h5>
         </div>
       </div>
 
-      <div id="category">
-        The category is (are):
+      <div id="spinner" style="display: block" class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
       </div>
 
-      <div id="overallSentiment">
-        This text is neutral
+      <div id="results" style="display: none">
+        <div id="spacer"></div>
+
+        <div id="category">
+          The category is (are):
+        </div>
+
+        <div id="sentiment-score" style="display: none">
+          The sentiment score is:
+        </div>
+
+        <div id="keywords-container">
+          <div>
+            The keywords of this article are:
+          </div>
+          <div id="keyword1">
+            Keyword 1
+          </div>
+          <div id="keyword2">
+            Keyword 2
+          </div>
+          <div id="keyword3">
+            Keyword 3
+          </div>
+        </div>
+        
+        <div id="overallSentiment">
+          This text is neutral
+        </div>
       </div>
+      <script src="popup.js"></script>
     </div>
-    <script src="popup.js"></script>
-  </div>
-</body>
-
+  </body>
 </html>

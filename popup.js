@@ -35,7 +35,7 @@ async function callback(tabs) {
             let truncatedSedimentScore = "n/a"
 
             if (sentimentScore !== undefined) {
-                document.getElementById("sentiment-score").style.display = "";
+                document.getElementById("sentiment-score").style.display = "inline";
                 truncatedSedimentScore = sentimentScore.toString().substring(0, 6);
             }
 
@@ -57,9 +57,9 @@ let overallSentimentContainer = document.getElementById("popupContainer");
 
 function setKeywords(keywordArray) {
 
-    document.getElementById("keyword1").textContent = keywordArray[0];
-    document.getElementById("keyword2").textContent = keywordArray[1];
-    document.getElementById("keyword3").textContent = keywordArray[2];
+    document.getElementById("keyword1").textContent = "- " + keywordArray[0].toLowerCase();
+    document.getElementById("keyword2").textContent = "- " + keywordArray[1].toLowerCase();
+    document.getElementById("keyword3").textContent = "- " + keywordArray[2].toLowerCase();
 
 }
 
@@ -108,7 +108,7 @@ function createCategoryDiv() {
     newCategoryDiv.setAttribute("id", "category");
     newCategoryDiv.textContent = "The category is (are):";
 
-    document.getElementById("sentiment-score").appendChild(newCategoryDiv);
+    document.getElementById("spacer").appendChild(newCategoryDiv);
 
 }
 
