@@ -74,8 +74,9 @@ function setCategories(data) {
 
         let newDiv = document.createElement("div");
         newDiv.classList.add("w-full");
+        newDiv.classList.add("text-left");
 
-        newDiv.textContent = data.category.categories[i].name.substring(1, data.category.categories[i].name.length);
+        newDiv.textContent = "- " + data.category.categories[i].name.substring(1, data.category.categories[i].name.length);
         newDiv.textContent += " and we are " + data.category.categories[i].confidence.toString().substring(0, 6) + " sure of this"
         document.getElementById("category").appendChild(newDiv);
     }
