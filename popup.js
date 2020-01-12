@@ -35,7 +35,7 @@ async function callback(tabs) {
             let truncatedSedimentScore = "n/a"
 
             if (sentimentScore !== undefined) {
-                document.getElementById("sentiment-score").style.display = "";
+                document.getElementById("sentiment-score").style.display = "inline";
                 truncatedSedimentScore = sentimentScore.toString().substring(0, 6);
             }
 
@@ -98,7 +98,7 @@ function createCategoryDiv() {
     newCategoryDiv.setAttribute("id", "category");
     newCategoryDiv.textContent = "The category is (are):";
 
-    document.getElementById("sentiment-score").appendChild(newCategoryDiv);
+    document.getElementById("spacer").appendChild(newCategoryDiv);
 
 }
 
