@@ -1,5 +1,5 @@
-# eyes
-Chrome browser extension.
+# Truth Be Told
+Let us better understand the news we read. At a glance, view your article's sentiment, keywords, categories. Quickly fact check statements and ensure you're getting the truth! 
 
 ## Try it out!
 1. Clone this repo
