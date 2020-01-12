@@ -118,18 +118,9 @@ function createCategoryDiv() {
 
 function setupProgressBar(truncatedSentimentScore) {
 
-    let maxWidth = window.innerWidth;   
-    truncatedSentimentScore = parseFloat(truncatedSentimentScore);
-
-    console.log(typeof truncatedSentimentScore);
-
-    console.log("before math");
-
-    let width = (truncatedSedimentScore + 1.0) * maxWidth
-
-    console.log("after math");
-
-
+    let maxWidth = window.innerWidth; 
+    fscore = parseFloat(truncatedSentimentScore);
+    let width = (fscore + 1.0) * parseFloat(maxWidth/2)
     let progressBar = document.getElementById("progress-bar");
     progressBar.style["width"] = width.toString() + "px";
 }
