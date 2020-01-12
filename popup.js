@@ -1,6 +1,32 @@
 let analyzeText = document.getElementById("analyzeText");
 let textToAnaylze = document.getElementById("textToAnalyze")
-let popupContainer = document.getElementById("popupContainer")
+
+let factCheckTextButton = document.getElementById("factCheckTextButton");
+let textToFactCheck = document.getElementById("textToFactCheck")
+
+factCheckTextButton.onclick = async () => {
+    fetch('https://nwhackers2020.appspot.com/fact_check', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: "text=" + textToFactCheck.value,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        alert("That fact is: " + data.results[0].truthRating + ". Read more at: " + data.results[0].url)
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+        alert("We were unable to fact check this statement.")
+    });
+}
+
+chrome.tabs.executeScript( {
+    code: "window.getSelection().toString();"
+}, function(selection) {
+    document.getElementById("textToFactCheck").value = selection[0];
+});
 
 let overallSentimentContainer = document.getElementById("popupContainer")
 
