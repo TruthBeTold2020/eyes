@@ -97,10 +97,14 @@ function clearCategories() {
     for (let i = 0; i < categoryDiv.childNodes.length; i++) {
       categoryDiv.removeChild(categoryDiv.childNodes[i]);
     }
+<<<<<<< HEAD
 
     createCategoryDiv();
   }
+=======
+>>>>>>> 55963ed2b7a1f7260c6113397f89d5d5e1b27e7c
 }
+
 
 function createCategoryDiv() {
   let newCategoryDiv = document.createElement("div");
@@ -111,6 +115,7 @@ function createCategoryDiv() {
 }
 
 function setOverallSentiment(sentimentScore) {
+<<<<<<< HEAD
   const overallSentimentArray = ["Negative", "Neutral", "Positive"];
 
   if (sentimentScore < -0.25) {
@@ -123,4 +128,19 @@ function setOverallSentiment(sentimentScore) {
     document.getElementById("overallSentiment").textContent =
       "The overall sentiment is " + overallSentimentArray[2];
   }
+=======
+    const overallSentimentArray = ["Negative", "Neutral", "Positive"];
+
+    if (sentimentScore < -0.25) {
+        //negative
+        document.getElementById("overallSentiment").textContent = "The overall sentiment is " + overallSentimentArray[0];
+    } else if (sentimentScore > 0.25) {
+        // positive
+        document.getElementById("overallSentiment").textContent = "The overall sentiment is " + overallSentimentArray[2];
+    } else {
+        // negative
+        document.getElementById("overallSentiment").textContent = "The overall sentiment is " + overallSentimentArray[1];
+
+    }
+>>>>>>> 55963ed2b7a1f7260c6113397f89d5d5e1b27e7c
 }
