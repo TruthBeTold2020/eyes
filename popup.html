@@ -43,41 +43,46 @@
           This article has ahe sentiment score is:
         </div>
         <div class="progress">
-          <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          <div
+            id="progress-bar"
+            class="progress-bar"
+            role="progressbar"
+            aria-valuenow="0"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
-        <div class="col-12 my-1">
+        <div class="col-12 my-1" style="margin-bottom:2rem">
           The overall sentiment of this article is most likely
           <span id="overallSentiment" style="color: #900C3F"></span>
         </div>
 
-        <div class="col-12 my-1" id="spacer"></div>
+        <div class="col-12 my-1" id="spacer" style="margin-top:2rem"></div>
 
-        <div class="col-12 my-1" id="category">
+        <div class="col-12 my-1" id="category" style="margin-top:2rem">
           The article seems to be about:
         </div>
 
-        <div id="keywords-container">
-          <div>
-            The keywords of this article are:
-          </div>
-          <div id="keyword1">
-            Keyword 1
-          </div>
-          <div id="keyword2">
-            Keyword 2
-          </div>
-          <div id="keyword3">
-            Keyword 3
-          </div>
+        <div
+          class="col-12"
+          my-1”
+          id="keywords-container"
+          style="margin-top:2rem"
+        >
+          The article seems to be about:
         </div>
-        <div>
+        <div class="col-12 my-1" id="keywords-container">
           <span id="keyword1" style="color: #FF5733">Keyword 1</span>
           <span id="keyword2" style="color: #2FE1A0 ">Keyword 2</span>
           <span id="keyword3" style="color: #FFC300">Keyword 3</span>
         </div>
       </div>
-      <div class="row flex-grow-1 align-items-end justify-content-end">
-        Last line
+      <div
+        class="row flex-grow-1 align-items-end justify-content-end text-center"
+        style="padding-left:1rem; padding-right: 1rem; font-size: 13px;"
+      >
+        PS: If you're feeling *experimental*, try select a statement, right
+        click and use our tool to check if it's a fact!
       </div>
       <script src="popup.js"></script>
     </div>

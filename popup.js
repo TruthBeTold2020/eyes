@@ -41,10 +41,10 @@ async function callback(tabs) {
         truncatedSedimentScore = sentimentScore.toString().substring(0, 6);
       }
 
-    if (truncatedSedimentScore !== "n/a") {
+      if (truncatedSedimentScore !== "n/a") {
         this.setupProgressBar(truncatedSedimentScore);
-    }
-    
+      }
+
       document.getElementById("sentiment-score").textContent =
         "This sentiment score is: " + truncatedSedimentScore;
 
@@ -63,11 +63,11 @@ let overallSentimentContainer = document.getElementById("popupContainer");
 
 function setKeywords(keywordArray) {
   document.getElementById("keyword1").textContent =
-    " #" + keywordArray[0].toLowerCase();
+    "  #" + keywordArray[0].toLowerCase() + " ";
   document.getElementById("keyword2").textContent =
-    " #" + keywordArray[1].toLowerCase();
+    "  #" + keywordArray[1].toLowerCase() + " ";
   document.getElementById("keyword3").textContent =
-    " #" + keywordArray[2].toLowerCase();
+    "  #" + keywordArray[2].toLowerCase() + " ";
 }
 
 function setCategories(data) {
@@ -85,14 +85,20 @@ function setCategories(data) {
 
   for (let i = 0; i < data.categories.length; i++) {
     let newDiv = document.createElement("div");
+    newDiv.setAttribute("class", "row");
+    let divCategory = document.createElement("div");
+    divCategory.setAttribute("class", "col-8 justify-content-center");
+    divCategory.textContent = data.categories[i].name.substring(
+      1,
+      data.categories[i].name.length
+    );
 
-    newDiv.textContent =
-      "- " +
-      data.categories[i].name.substring(1, data.categories[i].name.length);
-    newDiv.textContent +=
-      " and we are " +
-      data.categories[i].confidence.toString().substring(0, 6) +
-      " sure of this";
+    let divPercentage = document.createElement("div");
+    divPercentage.setAttribute("class", "col-4 justify-content-center");
+    divPercentage.textContent =
+      data.categories[i].confidence.toString().substring(0, 6) + " likely";
+    newDiv.appendChild(divCategory);
+    newDiv.appendChild(divPercentage);
     document.getElementById("category").appendChild(newDiv);
   }
 }
@@ -112,19 +118,25 @@ function clearCategories() {
 function createCategoryDiv() {
   let newCategoryDiv = document.createElement("div");
   newCategoryDiv.setAttribute("id", "category");
+  newCategoryDiv.setAttribute("style", "margin-top:2rem");
   newCategoryDiv.textContent = "The category is (are):";
 
   document.getElementById("spacer").appendChild(newCategoryDiv);
 }
 
-
 function setupProgressBar(truncatedSentimentScore) {
-
-    let maxWidth = window.innerWidth; 
-    fscore = parseFloat(truncatedSentimentScore);
-    let width = (fscore + 1.0) * parseFloat(maxWidth/2)
-    let progressBar = document.getElementById("progress-bar");
-    progressBar.style["width"] = width.toString() + "px";
+  let maxWidth = window.innerWidth;
+  fscore = parseFloat(truncatedSentimentScore);
+  let width = (fscore + 1.0) * parseFloat(maxWidth / 2);
+  let progressBar = document.getElementById("progress-bar");
+  if (fscore < -0.25) {
+    progressBar.style["background-color"] = "red";
+  } else if (fscore >= -0.25 && fscore <= 0.25) {
+    progressBar.style["background-color"] = "yellow";
+  } else {
+    progressBar.style["background-color"] = "green";
+  }
+  progressBar.style["width"] = width.toString() + "px";
 }
 
 function setOverallSentiment(sentimentScore) {
