@@ -9,10 +9,11 @@
         }
     },
     "icons": {
+        "16": "/images/get_started16.png",
         "128": "icon.png"
     },
     "permissions": [
-        "activeTab","declarativeContent","storage"
+        "activeTab","contextMenus","declarativeContent","storage"
     ],
     "background": {
         "scripts": [
