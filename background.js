@@ -4,7 +4,7 @@ chrome.runtime.onInstalled.addListener(function() {
       {
         conditions: [
           new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { schemes: "https" }
+            pageUrl: {  schemes: ["https"] }
           })
         ],
         actions: [new chrome.declarativeContent.ShowPageAction()]
