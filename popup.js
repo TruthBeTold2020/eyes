@@ -23,12 +23,12 @@ analyzeTextButton.onclick = async () => {
 
 factCheckTextButton.onclick = async () => {
     //TODO update this endpoint
-    fetch('https://nwhackers2020.appspot.com/analyze', {
+    fetch('https://nwhackers2020.appspot.com/fact_check', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: "text=" + textToAnaylze.value,
+      body: "text=" + textToFactCheck.value,
     })
     .then((response) => response.json())
     .then((data) => {
