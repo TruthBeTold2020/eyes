@@ -30,7 +30,7 @@ async function callback(tabs) {
             const sentimentScore = data.sentiment.score;
 
             document.getElementById("results").style.display = "block";
-            document.getElementById("spinner").style.display = "none"
+            document.getElementById("spinner").style.display = "none";
 
             let truncatedSedimentScore = "n/a"
 
@@ -41,6 +41,8 @@ async function callback(tabs) {
 
             document.getElementById("sentiment-score").textContent = "This sentiment score is: " + truncatedSedimentScore;
 
+
+            this.setKeywords(data.topthreekeywords);
             this.setOverallSentiment(sentimentScore);
 
             this.setCategories(data);
@@ -51,7 +53,15 @@ async function callback(tabs) {
         });
 }
 
-let overallSentimentContainer = document.getElementById("popupContainer")
+let overallSentimentContainer = document.getElementById("popupContainer");
+
+function setKeywords(keywordArray) {
+
+    document.getElementById("keyword1").textContent = "- " + keywordArray[0].toLowerCase();
+    document.getElementById("keyword2").textContent = "- " + keywordArray[1].toLowerCase();
+    document.getElementById("keyword3").textContent = "- " + keywordArray[2].toLowerCase();
+
+}
 
 function setCategories(data) {
 
