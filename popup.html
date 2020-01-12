@@ -1,38 +1,23 @@
-<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-
 <!DOCTYPE html>
 <html>
 
 <head>
 </head>
 
-<body class="w-64 h-64 text-center">
-  <div class="border-black border-4">
-    <div class="text-lg font-bold mt-4">
+<body>
+  <div>
+    <div>
       Text Sentiment and category analyzer
     </div>
-    <div class="py-4">
-      <h1 class="underline">Analyze this text:</h1>
-      <input id="textToAnalyze"
-        class="shadow appearance-none border rounded w-56 py-2 px-3 mt-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        type="text" placeholder="Text">
-      <button id="analyzeText" class="bg-blue-500 rounded-lg border-2 mt-2 h-10 w-56">Click me to Analyze
-        Text!</button>
-      <h1 class="underline">Fact check this text:</h1>
-      <input id="textToFactCheck"
-        class="shadow appearance-none border rounded w-56 py-2 px-3 mt-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        type="text" placeholder="Text">
-        <button id="factCheckTextButton" class="bg-blue-500 rounded-lg border-2 mt-2 h-10 w-56">Click me to  Fact Check Text!</button>
       <script src="popup.js"></script>
-    </div>
   </div>
 
-  <div id="results" class="invisible mt-6 p-2 border-black border-4">
-    <div id="sentiment-score" class="bg-blue-500 text-center align-middle">
+<div id="results" style="display: none">
+    <div id="sentiment-score">
       The sentiment score is:
     </div>
     
-    <div id="category" class="bg-pink-500">
+    <div id="category">
       The category is (are):
     </div>
 

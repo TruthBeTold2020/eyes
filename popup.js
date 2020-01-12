@@ -4,73 +4,32 @@ let textToAnaylze = document.getElementById("textToAnalyze")
 let factCheckTextButton = document.getElementById("factCheckTextButton");
 let textToFactCheck = document.getElementById("textToFactCheck")
 
-factCheckTextButton.onclick = async () => {
-    fetch('https://nwhackers2020.appspot.com/fact_check', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: "text=" + textToFactCheck.value,
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        alert("That fact is: " + data.results[0].truthRating + ". Read more at: " + data.results[0].url)
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-        alert("We were unable to fact check this statement.")
-    });
-}
-
-chrome.tabs.executeScript( {
+chrome.tabs.executeScript({
     code: "window.getSelection().toString();"
-}, async function(selection) {
+}, async function (selection) {
     var query = { active: true, currentWindow: true };
     await chrome.tabs.query(query, callback);
 });
 
 async function callback(tabs) {
-    var currentTab = tabs[0].url; 
+    var currentTab = tabs[0].url;
     console.log(currentTab);// there will be only one in this array
+
     fetch('https://nwhackers2020.appspot.com/scrap_website', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: "url=" + currentTab,
-      })
-      .then((response) => response.json())
-      .then((data) => alert('sentiment score: ' + JSON.stringify(data.sentiment.score)))
-      .catch((error) => {
-          alert("We were unable to fact check this statement.")
-      });
-  }
-
-let overallSentimentContainer = document.getElementById("popupContainer")
-
-analyzeText.onclick = async () => {
-
-    if (hasLessThanMinWords()) {
-        alert("Enter 20+ words for analysis.");
-        return;
-    };
-
-    fetch('https://nwhackers2020.appspot.com/analyze', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: "text=" + textToAnaylze.value,
+        body: "url=" + currentTab,
     })
         .then((response) => response.json())
         .then((data) => {
 
             console.log(data);
 
-            const sentimentScore = data.sentiment.documentSentiment.score;
+            const sentimentScore = data.sentiment.score;
 
-            document.getElementById("results").classList.remove("invisible");
-            document.getElementById("results").classList.add("visible");
+            document.getElementById("results").style.display = "block";
 
             let truncatedSedimentScore = "n/a"
 
@@ -79,30 +38,22 @@ analyzeText.onclick = async () => {
             }
 
             document.getElementById("sentiment-score").textContent = "This sentiment score is: " + truncatedSedimentScore;
-            document.getElementById("overallSentiment").className = "";
 
             this.setOverallSentiment(sentimentScore);
 
             this.setCategories(data);
-
-
         })
+
         .catch((error) => {
-            console.error('Error:', error);
+            alert("We were unable to analyze this website.")
         });
-
 }
 
-function hasLessThanMinWords() {
-
-    let numWords = textToAnaylze.value.trim().split(/\s+/).length;;
-
-    return (numWords < 20);
-}
+let overallSentimentContainer = document.getElementById("popupContainer")
 
 function setCategories(data) {
 
-    if (data.category.categories === undefined || data.category.categories === null) {
+    if (data.categories === undefined || data.categories === null) {
         document.getElementById("category").remove();
         return;
     }
@@ -114,14 +65,12 @@ function setCategories(data) {
 
     this.clearCategories();
 
-    for (let i = 0; i < data.category.categories.length; i++) {
+    for (let i = 0; i < data.categories.length; i++) {
 
         let newDiv = document.createElement("div");
-        newDiv.classList.add("w-full");
-        newDiv.classList.add("text-left");
 
-        newDiv.textContent = "- " + data.category.categories[i].name.substring(1, data.category.categories[i].name.length);
-        newDiv.textContent += " and we are " + data.category.categories[i].confidence.toString().substring(0, 6) + " sure of this"
+        newDiv.textContent = "- " + data.categories[i].name.substring(1, data.categories[i].name.length);
+        newDiv.textContent += " and we are " + data.categories[i].confidence.toString().substring(0, 6) + " sure of this"
         document.getElementById("category").appendChild(newDiv);
     }
 }
@@ -129,7 +78,7 @@ function setCategories(data) {
 function clearCategories() {
 
     if (document.getElementById("category") !== null) {
-                
+
         let categoryDiv = document.getElementById("category");
 
         for (let i = 0; i < categoryDiv.childNodes.length; i++) {
@@ -142,10 +91,9 @@ function clearCategories() {
 }
 
 function createCategoryDiv() {
-    
+
     let newCategoryDiv = document.createElement("div");
     newCategoryDiv.setAttribute("id", "category");
-    newCategoryDiv.classList.add("bg-pink-500");
     newCategoryDiv.textContent = "The category is (are):";
 
     document.getElementById("sentiment-score").appendChild(newCategoryDiv);
@@ -157,13 +105,10 @@ function setOverallSentiment(sentimentScore) {
 
     if (sentimentScore < -0.25) {
         document.getElementById("overallSentiment").textContent = "The overall sentiment is " + overallSentimentArray[0];
-        document.getElementById("overallSentiment").className += "bg-red-500";
     } else if (sentimentScore > -0.25 && sentimentScore < 0.25) {
         document.getElementById("overallSentiment").textContent = "The overall sentiment is " + overallSentimentArray[1];
-        document.getElementById("overallSentiment").className += "bg-yellow-500";
     } else {
         document.getElementById("overallSentiment").textContent = "The overall sentiment is " + overallSentimentArray[2];
-        document.getElementById("overallSentiment").className += "bg-green-500";
     }
 }
 
