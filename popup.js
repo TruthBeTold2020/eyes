@@ -4,12 +4,15 @@ let textToAnaylze = document.getElementById("textToAnalyze");
 let factCheckTextButton = document.getElementById("factCheckTextButton");
 let textToFactCheck = document.getElementById("textToFactCheck");
 
-chrome.tabs.executeScript({
+chrome.tabs.executeScript(
+  {
     code: "window.getSelection().toString();"
-}, async function (selection) {
+  },
+  async function(selection) {
     var query = { active: true, currentWindow: true };
     await chrome.tabs.query(query, callback);
-});
+  }
+);
 
 async function callback(tabs) {
   var currentTab = tabs[0].url;
@@ -102,7 +105,6 @@ function clearCategories() {
   }
 }
 
-
 function createCategoryDiv() {
   let newCategoryDiv = document.createElement("div");
   newCategoryDiv.setAttribute("id", "category");
@@ -112,17 +114,19 @@ function createCategoryDiv() {
 }
 
 function setOverallSentiment(sentimentScore) {
-    const overallSentimentArray = ["Negative", "Neutral", "Positive"];
+  const overallSentimentArray = ["Negative", "Neutral", "Positive"];
 
-    if (sentimentScore < -0.25) {
-        //negative
-        document.getElementById("overallSentiment").textContent = overallSentimentArray[0];
-    } else if (sentimentScore > 0.25) {
-        // positive
-        document.getElementById("overallSentiment").textContent = overallSentimentArray[2];
-    } else {
-        // negative
-        document.getElementById("overallSentiment").textContent = overallSentimentArray[1];
-
-    }
+  if (sentimentScore < -0.25) {
+    //negative
+    document.getElementById("overallSentiment").textContent =
+      overallSentimentArray[0];
+  } else if (sentimentScore > 0.25) {
+    // positive
+    document.getElementById("overallSentiment").textContent =
+      overallSentimentArray[2];
+  } else {
+    // negative
+    document.getElementById("overallSentiment").textContent =
+      overallSentimentArray[1];
+  }
 }
