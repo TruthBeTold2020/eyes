@@ -41,6 +41,10 @@ async function callback(tabs) {
         truncatedSedimentScore = sentimentScore.toString().substring(0, 6);
       }
 
+    if (truncatedSedimentScore !== "n/a") {
+        this.setupProgressBar(truncatedSedimentScore);
+    }
+    
       document.getElementById("sentiment-score").textContent =
         "This sentiment score is: " + truncatedSedimentScore;
 
@@ -111,6 +115,16 @@ function createCategoryDiv() {
   newCategoryDiv.textContent = "The category is (are):";
 
   document.getElementById("spacer").appendChild(newCategoryDiv);
+}
+
+
+function setupProgressBar(truncatedSentimentScore) {
+
+    let maxWidth = window.innerWidth; 
+    fscore = parseFloat(truncatedSentimentScore);
+    let width = (fscore + 1.0) * parseFloat(maxWidth/2)
+    let progressBar = document.getElementById("progress-bar");
+    progressBar.style["width"] = width.toString() + "px";
 }
 
 function setOverallSentiment(sentimentScore) {
