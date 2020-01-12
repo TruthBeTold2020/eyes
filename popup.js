@@ -99,8 +99,8 @@ function clearCategories() {
 
         createCategoryDiv();
     }
-
 }
+
 
 function createCategoryDiv() {
 
@@ -116,11 +116,15 @@ function setOverallSentiment(sentimentScore) {
     const overallSentimentArray = ["Negative", "Neutral", "Positive"];
 
     if (sentimentScore < -0.25) {
+        //negative
         document.getElementById("overallSentiment").textContent = "The overall sentiment is " + overallSentimentArray[0];
-    } else if (sentimentScore > -0.25 && sentimentScore < 0.25) {
-        document.getElementById("overallSentiment").textContent = "The overall sentiment is " + overallSentimentArray[1];
-    } else {
+    } else if (sentimentScore > 0.25) {
+        // positive
         document.getElementById("overallSentiment").textContent = "The overall sentiment is " + overallSentimentArray[2];
+    } else {
+        // negative
+        document.getElementById("overallSentiment").textContent = "The overall sentiment is " + overallSentimentArray[1];
+
     }
 }
 
