@@ -1,11 +1,10 @@
-let analyzeTextButton = document.getElementById("analyzeTextButton");
+let analyzeText = document.getElementById("analyzeText");
 let textToAnaylze = document.getElementById("textToAnalyze")
 
 let factCheckTextButton = document.getElementById("factCheckTextButton");
 let textToFactCheck = document.getElementById("textToFactCheck")
 
 factCheckTextButton.onclick = async () => {
-    //TODO update this endpoint
     fetch('https://nwhackers2020.appspot.com/fact_check', {
       method: 'POST',
       headers: {
