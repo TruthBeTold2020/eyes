@@ -5,6 +5,12 @@ let popupContainer = document.getElementById("popupContainer")
 let overallSentimentContainer = document.getElementById("popupContainer")
 
 analyzeText.onclick = async () => {
+
+    if (hasLessThanMinWords()) {
+        alert("Enter 20+ words for analysis.");
+        return;
+    };
+
     fetch('https://nwhackers2020.appspot.com/analyze', {
         method: 'POST',
         headers: {
@@ -22,12 +28,17 @@ analyzeText.onclick = async () => {
             document.getElementById("results").classList.remove("invisible");
             document.getElementById("results").classList.add("visible");
 
-            document.getElementById("sentiment-score").textContent = "This sentiment score is: " + sentimentScore;
+            let truncatedSedimentScore = "n/a"
+
+            if (sentimentScore !== undefined) {
+                truncatedSedimentScore = sentimentScore.toString().substring(0, 6);
+            }
+
+            document.getElementById("sentiment-score").textContent = "This sentiment score is: " + truncatedSedimentScore;
             document.getElementById("overallSentiment").className = "";
 
             this.setOverallSentiment(sentimentScore);
 
-            this.removeCategories();
             this.setCategories(data);
 
 
@@ -38,24 +49,26 @@ analyzeText.onclick = async () => {
 
 }
 
-function removeCategories() {
+function hasLessThanMinWords() {
 
-    document.getElementById("category").remove();
+    let numWords = textToAnaylze.value.trim().split(/\s+/).length;;
 
-    let newDiv = document.createElement("div");
-    newDiv.setAttribute("id", "category");
-    newDiv.classList.add("bg-pink-500");
-    newDiv.textContent = "The category is (are):";
-
-    document.getElementById("sentiment-score").appendChild(newDiv);
-
+    return (numWords < 20);
 }
 
 function setCategories(data) {
 
-    if (data.category.categories === undefined) {
+    if (data.category.categories === undefined || data.category.categories === null) {
+        document.getElementById("category").remove();
         return;
     }
+
+    // if there were no categories, make a new div category
+    if (document.getElementById("category") === undefined) {
+        createCategoryDiv();
+    }
+
+    this.clearCategories();
 
     for (let i = 0; i < data.category.categories.length; i++) {
 
@@ -63,9 +76,34 @@ function setCategories(data) {
         newDiv.classList.add("w-full");
 
         newDiv.textContent = data.category.categories[i].name.substring(1, data.category.categories[i].name.length);
-        newDiv.textContent += " and we are " + data.category.categories[i].confidence +" sure of this"
+        newDiv.textContent += " and we are " + data.category.categories[i].confidence.toString().substring(0, 6) + " sure of this"
         document.getElementById("category").appendChild(newDiv);
     }
+}
+
+function clearCategories() {
+
+    if (document.getElementById("category") !== null) {
+                
+        let categoryDiv = document.getElementById("category");
+
+        for (let i = 0; i < categoryDiv.childNodes.length; i++) {
+            categoryDiv.removeChild(categoryDiv.childNodes[i]);
+        }
+
+        createCategoryDiv();
+    }
+
+}
+
+function createCategoryDiv() {
+    
+    let newCategoryDiv = document.createElement("div");
+    newCategoryDiv.setAttribute("id", "category");
+    newCategoryDiv.classList.add("bg-pink-500");
+    newCategoryDiv.textContent = "The category is (are):";
+
+    document.getElementById("sentiment-score").appendChild(newCategoryDiv);
 
 }
 
@@ -83,24 +121,4 @@ function setOverallSentiment(sentimentScore) {
         document.getElementById("overallSentiment").className += "bg-green-500";
     }
 }
-
-let i = 0;
-function move() {
-    if (i == 0) {
-        i = 1;
-        var elem = document.getElementById("myBar");
-        var width = 1;
-        var id = setInterval(frame, 10);
-        function frame() {
-            if (width >= 100) {
-                clearInterval(id);
-                i = 0;
-            } else {
-                width++;
-                elem.style.width = width + "%";
-            }
-        }
-    }
-}
-
 
