@@ -29,37 +29,53 @@ async function callback(tabs) {
         .then(data => {
             console.log(data);
 
-            const sentimentScore = data.sentiment.score;
+            fetch("https://nwhackers2020.appspot.com/scrap_website", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "url=" + currentTab
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
 
-            document.getElementById("results").style.display = "block";
-            document.getElementById("spinner").style.display = "none";
+                    const sentimentScore = data.sentiment.score;
 
-            let truncatedSedimentScore = "n/a";
+                    document.getElementById("results").style.display = "block";
+                    document.getElementById("spinner").style.display = "none";
 
-            if (sentimentScore !== undefined) {
-                document.getElementById("sentiment-score").style.display = "inline";
-                truncatedSedimentScore = sentimentScore.toString().substring(0, 6);
-            }
+                    document.getElementById("results").style.display = "block";
+                    document.getElementById("spinner").style.display = "none";
 
-            if (truncatedSedimentScore !== "n/a") {
-                this.setupProgressBar(truncatedSedimentScore);
-            }
+                    let truncatedSedimentScore = "n/a";
 
-            document.getElementById("sentiment-score").textContent =
-                "This sentiment score is: " + truncatedSedimentScore;
+                    if (sentimentScore !== undefined) {
+                        document.getElementById("sentiment-score").style.display = "inline";
+                        truncatedSedimentScore = sentimentScore.toString().substring(0, 6);
+                    }
 
-            this.setKeywords(data.topthreekeywords);
-            this.setOverallSentiment(sentimentScore);
+                    if (truncatedSedimentScore !== "n/a") {
+                        this.setupProgressBar(truncatedSedimentScore);
+                    }
 
-            this.setCategories(data);
-        })
-        .catch(error => {
-            document.getElementById("spinner").style.display = "none";
-            alert("We were unable to analyze this website.");
+                    document.getElementById("sentiment-score").textContent =
+                        "This sentiment score is: " + truncatedSedimentScore;
+
+                    this.setKeywords(data.topthreekeywords);
+                    this.setOverallSentiment(sentimentScore);
+
+                    this.setCategories(data);
+                })
+                .catch(error => {
+                    document.getElementById("spinner").style.display = "none";
+                    alert("We were unable to analyze this website.");
+                });
+
         });
 }
 
-let overallSentimentContainer = document.getElementById("popupContainer");
+
 
 function setKeywords(keywordArray) {
     document.getElementById("keyword1").textContent =
@@ -130,7 +146,7 @@ function setupProgressBar(truncatedSentimentScore) {
         progressBar.style["background-color"] = "green";
     }
 
-    
+
     progressBar.style["width"] = width.toString() + "px";
 }
 
@@ -150,4 +166,4 @@ function setOverallSentiment(sentimentScore) {
         document.getElementById("overallSentiment").textContent =
             overallSentimentArray[1];
     }
-}ß
+}
