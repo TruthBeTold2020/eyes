@@ -24,9 +24,27 @@ factCheckTextButton.onclick = async () => {
 
 chrome.tabs.executeScript( {
     code: "window.getSelection().toString();"
-}, function(selection) {
-    document.getElementById("textToFactCheck").value = selection[0];
+}, async function(selection) {
+    var query = { active: true, currentWindow: true };
+    await chrome.tabs.query(query, callback);
 });
+
+async function callback(tabs) {
+    var currentTab = tabs[0].url; 
+    console.log(currentTab);// there will be only one in this array
+    fetch('https://nwhackers2020.appspot.com/scrap_website', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: "url=" + currentTab,
+      })
+      .then((response) => response.json())
+      .then((data) => alert('sentiment score: ' + JSON.stringify(data.sentiment.score)))
+      .catch((error) => {
+          alert("We were unable to fact check this statement.")
+      });
+  }
 
 let overallSentimentContainer = document.getElementById("popupContainer")
 
