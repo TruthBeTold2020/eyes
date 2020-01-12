@@ -18,12 +18,17 @@
   <body style="font-family: 'Montserrat'">
     <div class="container d-flex flex-column" id="container">
       <div>
-        <h5 style="text-align:right; margin-top: 1rem; padding-right: 2%; font-family:'Montserrat'; font-size: 30px""">
-            Article Insight
+        <h5
+          style="text-align:right; margin-top: 1rem; padding-right: 2%; font-family:'Montserrat'; font-size: 30px"
+        >
+          Article Insight
         </h5>
       </div>
 
-      <div class="row flex-grow-1 align-items-center justify-content-center" id="spinner">
+      <div
+        class="row flex-grow-1 align-items-center justify-content-center"
+        id="spinner"
+      >
         <div
           style="display: block; width: 5rem; height: 5rem;"
           class="spinner-border"
@@ -34,29 +39,32 @@
       </div>
 
       <div class="row" id="results" style="display: none">
-        <div class="col-12" id="sentiment-score" style="display: none">
+        <div class="col-12 my-1" id="sentiment-score" style="display: none">
           This article has ahe sentiment score is:
         </div>
-        <div class="col-12">
-            The overall sentiment of this article is most likely <span id="overallSentiment" style="color: #900C3F"></span>
+        <div class="col-12 my-1">
+          The overall sentiment of this article is most likely
+          <span id="overallSentiment" style="color: #900C3F"></span>
         </div>
 
-        <div class="col-12" id="spacer"></div>
+        <div class="col-12 my-1" id="spacer"></div>
 
-        <div class="col-12" id="category">
-          The article seems to be about: 
+        <div class="col-12 my-1" id="category">
+          The article seems to be about:
         </div>
 
-        <div class="col-12" id="keywords-container">
-          The article seems to be about: 
+        <div class="col-12 my-1" id="keywords-container">
+          The article seems to be about:
         </div>
         <div>
-            <span id="keyword1" style="color: #FF5733">Keyword 1</span>
-            <span id="keyword2" style="color: #2FE1A0 ">Keyword 2</span>
-            <span id="keyword3" style="color: #FFC300">Keyword 3</span>
+          <span id="keyword1" style="color: #FF5733">Keyword 1</span>
+          <span id="keyword2" style="color: #2FE1A0 ">Keyword 2</span>
+          <span id="keyword3" style="color: #FFC300">Keyword 3</span>
         </div>
       </div>
-
+      <div class="row flex-grow-1 align-items-end justify-content-end">
+        Last line
+      </div>
       <script src="popup.js"></script>
     </div>
   </body>
